@@ -9,7 +9,7 @@ basedir="$_HOME_""/../"
 
 f1="jitpack.yml"
 f2="pom.xml"
-f3=$(ls -1tr local_maven_ranzodium_*.zip|tail -1|tr -d " ")
+f3=$(ls -1tr local_maven_ranzodium_jni*.zip|tail -1|tr -d " ")
 
 cd "$basedir"
 
@@ -21,7 +21,7 @@ else
 	echo "git repo clean."
 fi
 
-cur_m_version=$(echo "$f3" | sed -e 's#^.*local_maven_ranzodium_##'|sed -e 's#.zip$##')
+cur_m_version=$(echo "$f3" | sed -e 's#^.*local_maven_ranzodium_jni##'|sed -e 's#.zip$##')
 
 # thanks to: https://stackoverflow.com/a/8653732
 # next_m_version=$(echo "$cur_m_version"|awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}')
@@ -30,7 +30,7 @@ next_m_version="$cur_m_version"
 echo $cur_m_version
 echo $next_m_version
 
-sed -i -e 's#unzip local_maven_ranzodium_.*$#unzip local_maven_ranzodium_'"$next_m_version"'.zip#' "$f1"
+sed -i -e 's#unzip local_maven_ranzodium_jni.*$#unzip local_maven_ranzodium_jni'"$next_m_version"'.zip#' "$f1"
 sed -i -e 's#.version..*./version.#<version>'"$next_m_version"'</version>#' "$f2"
 
 commit_message="$next_m_version"
