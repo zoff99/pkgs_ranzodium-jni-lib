@@ -1,0 +1,10 @@
+
+
+install:
+   - echo "installing ..."
+   - pwd
+   - id -a
+   - ls -al
+   - unzip local_maven_ranzodium_jni_1.0.0.zip
+   - mv -v .m2 ~/
+
